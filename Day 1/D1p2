@@ -1,0 +1,25 @@
+from pathlib import Path 
+f = open("Day 1\input.txt", "r")
+
+lst = ["test","one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "1","2","3","4","5","6","7","8","9"]
+sum = 0
+for x in f:
+    low = [1000, "h"]
+    high = [-1, "h"]
+    for k in lst:
+        if(x.find(k) >= 0):
+            if(x.find(k) < low[0]):
+                low = [x.find(k), k]
+            elif(x.find(k) > high[0]):
+                high = [x.find(k), k]
+        if(x.rfind(k) >= 0):
+            if(x.rfind(k) < low[0]):
+                low = [x.rfind(k), k]
+            elif(x.rfind(k) > high[0]):
+                high = [x.rfind(k), k]
+    low[1] = lst[lst.index(low[1]) % 10]
+    high[1] = lst[lst.index(high[1]) % 10]
+    sum += lst.index(low[1]) * 10 + lst.index(high[1])
+    
+print(sum)            
+
